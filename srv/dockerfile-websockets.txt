@@ -1,0 +1,7 @@
+FROM python:3.11.11-slim
+
+WORKDIR /app/websockets
+
+RUN pip install --no-cache-dir websockets influxdb-client
+
+CMD ["python", "/app/websockets/script.py"]

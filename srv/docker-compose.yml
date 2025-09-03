@@ -1,0 +1,86 @@
+version: "3.8"
+
+services:
+  apache:
+    image: php:apache
+    container_name: apache
+    ports:
+      - "80:80"
+    volumes:
+      - /srv/sites/site1/html:/var/www/html/site1
+      - /srv/sites/site2/html:/var/www/html/site2
+    networks:
+      - mynetwork
+    restart: unless-stopped
+
+  influxdb:
+    image: influxdb:latest
+    container_name: influxdb
+    ports:
+      - "8083:8083"
+      - "8086:8086"
+    environment:
+      - INFLUX_CONFIGS_PATH=/etc/influxdb2/influx-configs
+    volumes:
+      - influxdb_data:/var/lib/influxdb2
+    networks:
+      - mynetwork
+    restart: unless-stopped
+
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    container_name: mosquitto
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - /srv/config/mosquitto:/mosquitto/config
+    networks:
+      - mynetwork
+    restart: unless-stopped
+
+  portainer:
+    image: portainer/portainer-ce:lts
+    container_name: portainer
+    ports:
+      - "8000:8000"
+      - "9443:9443"
+    volumes:
+      - portainer_data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: always
+  
+  telegraf:
+    image: telegraf:latest
+    container_name: telegraf
+    entrypoint: telegraf --config /etc/telegraf/telegraf.conf
+    environment:
+      - INFLUX_TOKEN=T8Xd4iSn0R68EWF1-q5xMjSl_MlM7MZc3eW0cigqQitq947KWUPuDPljB8nId6CIxncrV81SrERM9bp1QmGGLw==
+    volumes:
+      - /srv/config/telegraf:/etc/telegraf
+    networks:
+      - mynetwork
+    restart: unless-stopped
+
+  websockets:
+    image: websockets:latest
+    container_name: websockets
+    ports:
+      - "8765:8765"
+    environment:
+      - INFLUX_TOKEN=q_cQwkfOkUtoIesaU9L-EVD-oA8S8YuJJRWaeZT2riXG1V6qNMWEo2pUbbibNlyRDO2kjM38QGWniTTRHyZpQA==
+    volumes:
+      - /srv/websockets/script.py:/app/websockets/script.py
+    command: python /app/websockets/script.py
+    networks:
+      - mynetwork
+    restart: unless-stopped
+    depends_on:
+      - influxdb
+
+networks:
+  mynetwork:
+
+volumes:
+  influxdb_data:
+  portainer_data:

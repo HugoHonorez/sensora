@@ -1,0 +1,385 @@
+:root {
+    --very-dark: #16423C;
+    --dark: #6A9C89;
+    --light: #C4DAD2;
+    --very-light: #E9EFEC;
+    --text: #333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--very-light);
+    color: var(--text);
+}
+
+.nav-button {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    background-color: var(--dark);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.nav-button:hover {
+    background-color: var(--very-dark);
+    transform: scale(1.05);
+}
+
+.nav-button svg {
+    width: 24px;
+    height: 24px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+#sidenav {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: var(--dark);
+    padding-top: 60px;
+    transition: left 0.3s ease;
+    z-index: 1000;
+}
+
+#sidenav ul {
+    list-style-type: none;
+    padding-left: 0;
+    text-align: center;
+}
+
+
+#sidenav li {
+    margin: 1rem 0;
+}
+
+#sidenav a {
+    color: white;
+    text-decoration: none;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 80%;
+    margin: 0 auto;
+    text-align: left;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#sidenav a:hover {
+    background-color: var(--very-dark);
+    transform: scale(1.05);
+}
+
+#sidenav svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.content {
+    margin-left: 0;
+    transition: margin-left 0.3s ease;
+}
+
+.content.open {
+    margin-left: 250px;
+}
+
+footer {
+    background-color: var(--text);
+    padding: 1rem 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: 100%;
+}
+
+footer p {
+    color: white;
+}
+
+header {
+    background-color: var(--light);
+    padding: 1rem 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+}
+
+.header-text {
+    flex: 1;
+}
+
+.logo {
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 110px;
+}
+
+header h1 {
+    font-size: 54px;
+    color: #fff;
+}
+
+header h2 {
+    color: #fff;
+    font-size: 16px;
+}
+
+section {
+    padding: 2rem 3rem;
+    display: block;
+}
+
+section h2, section p {
+    margin-left: 2rem;
+    margin-top: 0;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 2rem auto;
+    max-width: 900px;
+}
+
+.data-card {
+    background-color: #ffffff;
+    border-radius: 1rem;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 150px;
+    max-width: 100%;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    align-items: center;
+}
+
+.data-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.data-card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.data-card .value {
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+.normal {
+    color: var(--text);
+    background: linear-gradient(145deg, #ffffff, #ffffffea);
+}
+
+.threshold-exceeded {
+    background: linear-gradient(145deg, #ff4c4c, #ff8080);
+    color: white;
+}
+
+
+#filter-section {
+    background-color: var(--light);
+    padding: 2rem 3rem;
+    height: auto;
+    box-sizing: border-box;
+}
+
+#filter-section h2 {
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    color: var(--text);
+}
+
+#filter-section p {
+    margin-bottom: 1.5rem;
+    color: var(--text);
+}
+
+#filter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.filter-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+#filter-form label {
+    font-weight: normal;
+    font-size: 1rem;
+    color: var(--text);
+}
+
+#filter-form select,
+#filter-form input[type="text"] {
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    border: 1px solid var(--dark);
+    border-radius: 0.5rem;
+    background-color: #fff;
+    color: var(--text);
+}
+
+.custom-date-fields {
+    display: none;
+    gap: 1rem;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.filter-buttons button {
+    background-color: var(--dark);
+    color: white;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s, transform 0.2s;
+    cursor: pointer;
+}
+
+.filter-buttons button svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.filter-buttons button:hover {
+    background-color: var(--very-dark);
+    transform: scale(1.05);
+}
+
+#temperature-section,
+#humidity-section,
+#pressure-section,
+#light-section,
+#airquality-section {
+    margin: 2rem auto;
+    padding: 1.5rem;
+    max-width: 1000px;
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#temperature-section h2,
+#humidity-section h2,
+#pressure-section h2,
+#light-section h2,
+#airquality-section h2 {
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    color: var(--text);
+}
+
+#temperature-section p,
+#humidity-section p,
+#pressure-section p,
+#light-section p,
+#airquality-section p {
+    margin-bottom: 1.5rem;
+    color: var(--text);
+}
+
+.graph-card canvas {
+    width: 100% !important;
+    height: auto !important;
+}
+
+#sensors-power {
+    background-color: var(--light);
+    padding: 2rem 3rem;
+    height: auto;
+    box-sizing: border-box;
+}
+
+#sensors-power h2 {
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    color: var(--text);
+}
+
+#sensors-power p {
+    margin-bottom: 1.5rem;
+    color: var(--text);
+}
+
+#sensors-power div[data-sensor] {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+#sensors-power div[data-sensor] p {
+    margin: 0;
+    font-size: 1rem;
+    white-space: nowrap;
+}
+
+.sensor-status {
+    display: flex;
+    align-items: center;
+}
+
+.sensor-status button {
+    background-color: var(--dark);
+    color: white;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s, transform 0.2s;
+    cursor: pointer;
+}
+
+.sensor-status button:hover {
+    background-color: var(--very-dark);
+    transform: scale(1.05);
+}
